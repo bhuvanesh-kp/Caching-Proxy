@@ -1,49 +1,47 @@
 const express = require('express');
 const axios = require('axios');
-const NodeCache = require('node-caching');
+const NodeCache = require('node-cache');
 
-class CachingProxyServer{
-    constructor(port,origin){
+class CachingProxyServer {
+    constructor(port, origin){
         this.port = port;
-        this.app = express();
         this.origin = origin;
-        this.cache = new NodeCache({stdTTD:3600});
+        this.cache = new NodeCache({stdTTL:3600});
+        this.app = express();
     }
 
-    async handleRequest(req,res){
+    async handleRequest(req, res){
         const url = `${this.origin.replace(/\/+$/, '')}/${req.originalUrl.replace(/^\/+/, '')}`;
-        console.log(`forwarding request to ${url}`);
+        console.log(`Forwarding request to: ${url}`);  
         const cachedResponse = this.cache.get(url);
 
-        if (cachedResponse){
-            res.setHeader('X-cache',"HIT");
+        if(cachedResponse){
+            res.setHeader('X-Cache', 'HIT');
             return res.status(200).send(cachedResponse.data);
         }
 
-        try{
-            const response = await axois.get(url);
-            const responseData = response.data;
-            this.cache.set(url,responseData);
-            res.setHeader('X-cache','MISS');
-            res.status(200).send(responseData);
-        }
-        catch(error){
+        try {
+            const response = await axios.get(url);
+            const responseData = response.data; 
+            this.cache.set(url, responseData);
+            res.setHeader('X-Cache', 'MISS');
+            res.status(response.status).send(responseData);
+          } catch (error) {
             console.error(`Request failed with status code: ${error.response ? error.response.status : 500}`);
             res.status(error.response ? error.response.status : 500).send(error.message);
+          }
         }
-    }
 
     start(){
-        this.app.get('*',this.handleRequest.bind(this));
+        this.app.get('*', this.handleRequest.bind(this));
         this.app.listen(this.port, () => {
-            console.log(`Caching proxy on port: ${this.port}`);
-        });
+            console.log(`Caching Proxy Server running on port ${this.port}`);
+          });
     }
 
-    clearCache(){
+    clearCache() {
         this.cache.flushAll();
-    }
+      }
 }
 
-
-modules.export = CachingProxyServer;
+module.exports = CachingProxyServer;

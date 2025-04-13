@@ -1,7 +1,8 @@
-const CachingProxyServer = require('./server');
 const yargs = require('yargs');
+const CachingProxyServer = require('./server');
 
-yargs.command('start','Starting proxy server',{
+yargs.command('start', 'Start the caching proxy server',
+    {
         port: {
             describe: 'Port to run server on',
             demandOption: true,
@@ -13,21 +14,19 @@ yargs.command('start','Starting proxy server',{
             type: 'string',
         },
     },
-    (argv)=>{
-        const {port,origin} = argv;
-        const server = new CachingProxyServer(port ,origin);
+    (argv) => {
+        const {port, origin} = argv;
+        const server = new CachingProxyServer(port, origin);
         server.start();
     }
 )
-
-.command('clear', 'Clear Cache',
+.command('clear', 'Clear the cache',
     {},
     () => {
         const server = new CachingProxyServer();
         server.clearCache();
-        console.log(`Cache cleared !!!`);
+        console.log(`Cache're cleared`);
     }
 )
-
 .help()
 .argv;
