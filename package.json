@@ -1,0 +1,22 @@
+{
+  "name": "caching-proxy",
+  "version": "1.0.0",
+  "description": "Caching Proxy\r Build a caching server that caches responses from other servers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhuvanesh-kp/Caching-Proxy.git"
+  },
+  "author": "bhuvanesh-kp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhuvanesh-kp/Caching-Proxy/issues"
+  },
+  "homepage": "https://github.com/bhuvanesh-kp/Caching-Proxy#readme",
+  "dependencies": {
+    "i": "^0.3.7"
+  }
+}
