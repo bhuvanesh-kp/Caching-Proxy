@@ -22,6 +22,7 @@ X-Cache: HIT
 
 # If the response is from the origin server
 X-Cache: MISS
+
 If the same request is made again, the caching proxy server should return the cached response instead of forwarding the request to the server.
 
 You should also provide a way to clear the cache by running a command like following:
