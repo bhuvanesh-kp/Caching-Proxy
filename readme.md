@@ -1,4 +1,4 @@
-### Caching Proxy
+# Caching Proxy
 Build a caching server that caches responses from other servers.
 
 You are required to build a CLI tool that starts a caching proxy server, it will forward requests to the actual server and cache the responses. If the same request is made again, it will return the cached response instead of forwarding the request to the server.
@@ -12,7 +12,8 @@ caching-proxy --port <number> --origin <url>
 For example, if the user runs the following command:
 
 caching-proxy --port 3000 --origin http://dummyjson.com
-The caching proxy server should start on port 3000 and forward requests to http://dummyjson.com.
+
+The caching proxy server should start on port 3000 and forward requests to http://dummyjson.com. 
 
 Taking the above example, if the user makes a request to http://localhost:3000/products, the caching proxy server should forward the request to http://dummyjson.com/products, return the response along with headers and cache the response. Also, add the headers to the response that indicate whether the response is from the cache or the server.
 
@@ -26,4 +27,4 @@ If the same request is made again, the caching proxy server should return the ca
 You should also provide a way to clear the cache by running a command like following:
 
 caching-proxy --clear-cache
-After building the above project, you should have a good understanding of how caching works and how you can build a caching proxy server to cache responses from other servers.
+
