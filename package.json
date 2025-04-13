@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/bhuvanesh-kp/Caching-Proxy#readme",
   "dependencies": {
-    "i": "^0.3.7"
+    "axios": "^1.8.4",
+    "express": "^5.1.0",
+    "i": "^0.3.7",
+    "node-caching": "^0.0.1"
   }
 }
